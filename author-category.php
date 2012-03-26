@@ -3,7 +3,7 @@
 Plugin Name: Author Category
 Plugin URI: http://en.bainternet.info
 Description: simple plugin limit authors to post just in one category.
-Version: 0.1
+Version: 0.2
 Author: Bainternet
 Author URI: http://en.bainternet.info
 */
@@ -128,7 +128,10 @@ if (!class_exists('author_category')){
          */
          public function extra_user_profile_fields( $user ){ 
             //only admin can see and save the categories
-            if ( !current_user_can( 'manage_options', $user->ID ) ) { return false; }
+            if ( !current_user_can( 'manage_options' ) ) { return false; }
+            global $current_user;
+            get_currentuserinfo();
+            if ($current_user->ID == $user->ID) { return false; }
             echo '<h3>'.__('Author Category', 'author_cat').'</h3>
             <table class="form-table">
                 <tr>
@@ -158,7 +161,7 @@ if (!class_exists('author_category')){
          */
         public function save_extra_user_profile_fields( $user_id ) {
             //only admin can see and save the categories
-            if ( !current_user_can( 'manage_options', $user_id ) ) { return false; }
+            if ( !current_user_can( 'manage_options') ) { return false; }
 
             update_user_meta( $user_id, '_author_cat', intval($_POST['author_cat']) );
         }

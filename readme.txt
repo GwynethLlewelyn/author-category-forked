@@ -3,8 +3,8 @@ Contributors: bainternet
 Donate link:http://en.bainternet.info/donations
 Tags: author category, limit author to category, author posts to category
 Requires at least: 3.0
-Tested up to: 3.3.1
-Stable tag: 0.2
+Tested up to: 3.3.2
+Stable tag: 0.3
 
 simple lightweight plugin limit authors to post just in one category.
 
@@ -48,6 +48,12 @@ Simply login as the admin user and under each user >> profile select the categor
 2. Author category metabox.
 
 == Changelog ==
+0.3 
+added plugin links,
+added XMLRPC and Quickpress support
+changed category save function from save_post to default input_tax field.
+added a function to overwrite default category option per user.
+
 0.2
 Fixed admin profile update issue.
 

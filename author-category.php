@@ -3,7 +3,7 @@
 Plugin Name: Author Category
 Plugin URI: http://en.bainternet.info
 Description: simple plugin limit authors to post just in one category.
-Version: 0.3
+Version: 0.4
 Author: Bainternet
 Author URI: http://en.bainternet.info
 */
@@ -74,7 +74,7 @@ if (!class_exists('author_category')){
          */
         public function user_default_category_option($false){
             $cat = $this->get_user_cat();
-            if (!empty($cat) && $cat > 0){
+            if (!empty($cat) && count($cat) > 0){
                 return $cat;
             }
             return false;
@@ -110,7 +110,7 @@ if (!class_exists('author_category')){
            global $current_user;
             get_currentuserinfo();
             $cat = $this->get_user_cat($current_user->ID);
-            if (!empty($cat) && $cat > 0){
+            if (!empty($cat) && count($cat) > 0){
                 echo '<style>.inline-edit-categories{display: none !important;}</style>';
             }
         }
@@ -127,9 +127,10 @@ if (!class_exists('author_category')){
 
             //get author categories
             $cat = $this->get_user_cat($current_user->ID);
-            if (!empty($cat) && $cat > 0){
+            if (!empty($cat) && count($cat) > 0){
                 //remove default metabox
                 remove_meta_box('categorydiv', 'post', 'side');
+                //add user specific categories
                 add_meta_box( 
                      'author_cat'
                     ,__( 'author category','author_cat' )
@@ -151,13 +152,22 @@ if (!class_exists('author_category')){
         public function render_meta_box_content(){
             global $current_user;
             get_currentuserinfo();
-            $cat = get_user_meta($current_user->ID,'_author_cat',true);
+            $cats = get_user_meta($current_user->ID,'_author_cat',true);
+            $cats = (array)$cats;
             // Use nonce for verification
             wp_nonce_field( plugin_basename( __FILE__ ), 'author_cat_noncename' );
-            if (!empty($cat) && $cat > 0){
-                $c = get_category($cat);
-                echo __('this will be posted in: <strong>','author_cat') . $c->name .__('</strong> Category');
-                echo '<input name="post_category[]" type="hidden" value="'.$c->term_id.'">';
+            if (!empty($cats) && count($cats) > 0){
+                if (count($cats) == 1){
+                    $c = get_category($cats[0]);
+                    echo __('this will be posted in: <strong>','author_cat') . $c->name .__('</strong> Category');
+                    echo '<input name="post_category[]" type="hidden" value="'.$c->term_id.'">';
+                }else{
+                    echo '<span>'.__('Make Sure you select only the categories you want: <strong>','author_cat').'</span><br />';
+                    foreach($cats as $cat ){
+                        $c = get_category($cat);
+                        echo '<input name="post_category[]" type="checkbox" checked="checked" value="'.$c->term_id.'"> '.$c->name .'<br />';
+                    }
+                }
             }
         }
 
@@ -174,20 +184,33 @@ if (!class_exists('author_category')){
             global $current_user;
             get_currentuserinfo();
             if ($current_user->ID == $user->ID) { return false; }
+            $select = wp_dropdown_categories(array(
+                            'show_count' => 0,
+                            'hierarchical' => 1,
+                            'hide_empty' => 0,
+                            'echo' => 0,
+                            'name' => 'author_cat[]'));
+            $saved = get_user_meta($user->ID, '_author_cat', true );
+            foreach((array)$saved as $c){
+                $select = str_replace('value="'.$c.'"','value="'.$c.'" selected="selected"',$select);
+            }
+            $select = str_replace('<select','<select multiple="multiple"',$select);
             echo '<h3>'.__('Author Category', 'author_cat').'</h3>
             <table class="form-table">
                 <tr>
                     <th><label for="author_cat">'.__('Category').'</label></th>
                     <td>
-                        '.wp_dropdown_categories(array(
-                            'show_count' => 0,
-                            'hierarchical' => 1,
-                            'hide_empty' => 0,
-                            'echo' => 0,
-                            'name' => 'author_cat',
-                            'selected' => get_user_meta($user->ID, '_author_cat', true ))).'
+                        '.$select.'
                         <br />
-                    <span class="description">'.__('select a category to limit an author to post just in that category.','author_cat').'</span>
+                    <span class="description">'.__('select a category to limit an author to post just in that category (use Crtl to select more then one).','author_cat').'</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="author_cat_clear">'.__('Clear Category').'</label></th>
+                    <td>
+                        <input type="checkbox" name="author_cat_clear" value="1" />
+                        <br />
+                    <span class="description">'.__('Check if you want to clear the limitation for this user.','author_cat').'</span>
                     </td>
                 </tr>
             </table>';
@@ -205,7 +228,10 @@ if (!class_exists('author_category')){
             //only admin can see and save the categories
             if ( !current_user_can( 'manage_options') ) { return false; }
 
-            update_user_meta( $user_id, '_author_cat', intval($_POST['author_cat']) );
+            update_user_meta( $user_id, '_author_cat', $_POST['author_cat'] );
+                                                                                
+            if (isset($_POST['author_cat_clear']) && $_POST['author_cat_clear'] == 1)
+                delete_user_meta( $user_id, '_author_cat' );
         }
 
         /**
@@ -226,10 +252,10 @@ if (!class_exists('author_category')){
                 $user_id = $current_user->ID;
             }
             $cat = get_user_meta($user_id,'_author_cat',true);
-            if (empty($cat))
+            if (empty($cat) || count($cat) <= 0 || !is_array($cat))
                 return 0;
             else
-                return $cat;
+                return $cat[0];
 
         }
 
@@ -255,9 +281,8 @@ if (!class_exists('author_category')){
                 ); 
             return $links;
         }
-
     }//end class
-}
+}//end if
 //initiate the class on admin pages only
 if (is_admin()){
     $ac = new author_category();

@@ -4,7 +4,7 @@ Donate link:http://en.bainternet.info/donations
 Tags: author category, limit author to category, author posts to category
 Requires at least: 3.0
 Tested up to: 3.4.2
-Stable tag: 0.4
+Stable tag: 0.5
 
 simple lightweight plugin limit authors to post just in one category.
 
@@ -19,6 +19,8 @@ This Plugin allows you to select specific category per user and all of that user
 *   Only users with a specified category will be limited to that category, other will still have full control.
 *   Removes category metabox for selected users.
 *   Removed categories from quick edit for selected users.
+*   Option to clear selection.(new)
+*   multiple categories per user.(new)
 
 
 
@@ -48,6 +50,9 @@ Simply login as the admin user and under each user >> profile select the categor
 2. Author category metabox.
 
 == Changelog ==
+0.5
+Added post by mail category limitation.
+
 0.4
 Added support for multiple categories per user.
 added option to remove user selected category.

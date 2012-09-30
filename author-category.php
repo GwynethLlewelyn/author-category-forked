@@ -3,7 +3,7 @@
 Plugin Name: Author Category
 Plugin URI: http://en.bainternet.info
 Description: simple plugin limit authors to post just in one category.
-Version: 0.4
+Version: 0.5
 Author: Bainternet
 Author URI: http://en.bainternet.info
 */
@@ -51,7 +51,11 @@ if (!class_exists('author_category')){
 
             //xmlrpc post insert hook and quickpress
             add_filter('xmlrpc_wp_insert_post_data', array(&$this, 'user_default_category'),2);
-            add_filter('pre_option_default_category',array(&$this, 'user_default_category_option'));
+            add_filter('r',array(&$this, 'user_default_category_option'));
+
+            //post by email cat
+            add_filter( 'publish_phone',array($this,'post_by_email_cat'));
+
             //plugin links row
             add_filter( 'plugin_row_meta', array($this,'_my_plugin_links'), 10, 2 );
             //remove quick and bulk edit
@@ -98,6 +102,26 @@ if (!class_exists('author_category')){
                 $post_data['tax_input']['category'] = array($cat);
             }
             return $post_data;
+        }
+
+        /**
+         * post_by_email_cat 
+         * 
+         * @author Ohad   Raz
+         * @since 0.5
+         * 
+         * @param  int $post_id 
+         * @return void
+         */
+        public function post_by_email_cat($post_id){
+            $p = get_post($post_id);
+            $cat = $this->get_user_cat($p['post_author']);
+            if ($cat){
+                $email_post = array();
+                $email_post['ID'] = $post_id;
+                $email_post['post_category'] = array($cat);
+                wp_update_post($email_post);
+            }           
         }
 
         /**

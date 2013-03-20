@@ -50,6 +50,11 @@ Simply login as the admin user and under each user >> profile select the categor
 2. Author category metabox.
 
 == Changelog ==
+0.6
+Fixed xmlrpc posting issue.
+Added an option panel to allow configuration of multiple categories.
+added An action hook `in_author_category_metabox`
+
 0.5
 Added post by mail category limitation.
 

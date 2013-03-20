@@ -3,7 +3,7 @@
 Plugin Name: Author Category
 Plugin URI: http://en.bainternet.info
 Description: simple plugin limit authors to post just in one category.
-Version: 0.5
+Version: 0.6
 Author: Bainternet
 Author URI: http://en.bainternet.info
 */
@@ -41,28 +41,50 @@ if (!class_exists('author_category')){
          * @since 0.1
          */
         public function __construct(){
-            add_action( 'add_meta_boxes', array( &$this, 'add_meta_box' ) );
+            
+            $this->hooks();
+
+        }
+
+        /**
+         * hooks add all action and filter hooks
+         * @since 0.6
+         * @return void
+         */
+        public function hooks(){
+            
             // save user field
-            add_action( 'personal_options_update', array( &$this,'save_extra_user_profile_fields' ));
-            add_action( 'edit_user_profile_update', array( &$this,'save_extra_user_profile_fields' ));
+            add_action( 'personal_options_update', array( $this,'save_extra_user_profile_fields' ));
+            add_action( 'edit_user_profile_update', array( $this,'save_extra_user_profile_fields' ));
             // add user field
-            add_action( 'show_user_profile', array( &$this,'extra_user_profile_fields' ));
-            add_action( 'edit_user_profile', array( &$this,'extra_user_profile_fields' ));
+            add_action( 'show_user_profile', array( $this,'extra_user_profile_fields' ));
+            add_action( 'edit_user_profile', array( $this,'extra_user_profile_fields' ));
 
             //xmlrpc post insert hook and quickpress
-            add_filter('xmlrpc_wp_insert_post_data', array(&$this, 'user_default_category'),2);
-            add_filter('r',array(&$this, 'user_default_category_option'));
+            add_filter('xmlrpc_wp_insert_post_data', array($this, 'user_default_category'),2);
+            add_filter('pre_option_default_category',array($this, 'user_default_category_option'));
 
             //post by email cat
             add_filter( 'publish_phone',array($this,'post_by_email_cat'));
 
-            //plugin links row
-            add_filter( 'plugin_row_meta', array($this,'_my_plugin_links'), 10, 2 );
             //remove quick and bulk edit
             global $pagenow;
-            if (is_admin() && 'edit.php' == $pagenow)
-                add_action('admin_print_styles',array(&$this,'remove_quick_edit'));
+            if (is_admin()){
+                //add metabox 
+                add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
+                //plugin links row
+                add_filter( 'plugin_row_meta', array($this,'_my_plugin_links'), 10, 2 );
 
+                //add admin panel
+                if (!class_exists('SimplePanel')){
+                    require_once(plugin_dir_path(__FILE__).'inc/Simple_Panel_class.php');
+                    require_once(plugin_dir_path(__FILE__).'inc/author_category_Panel_class.php');
+                }
+
+                if ('edit.php' == $pagenow)
+                    add_action('admin_print_styles',array(&$this,'remove_quick_edit'));
+            }
+            
         }
 
         /**
@@ -157,7 +179,7 @@ if (!class_exists('author_category')){
                 //add user specific categories
                 add_meta_box( 
                      'author_cat'
-                    ,__( 'author category','author_cat' )
+                    ,__( 'Author category','author_cat' )
                     ,array( &$this, 'render_meta_box_content' )
                     ,'post' 
                     ,'side'
@@ -186,13 +208,17 @@ if (!class_exists('author_category')){
                     echo __('this will be posted in: <strong>','author_cat') . $c->name .__('</strong> Category');
                     echo '<input name="post_category[]" type="hidden" value="'.$c->term_id.'">';
                 }else{
-                    echo '<span>'.__('Make Sure you select only the categories you want: <strong>','author_cat').'</span><br />';
+                    echo '<span style="color: #f00;">'.__('Make Sure you select only the categories you want: <strong>','author_cat').'</span><br />';
+                    $options = get_option('author_cat_option');
+                    $checked =  (!isset($options['check_multi']))? ' checked="checked"' : '';
+
                     foreach($cats as $cat ){
                         $c = get_category($cat);
-                        echo '<input name="post_category[]" type="checkbox" checked="checked" value="'.$c->term_id.'"> '.$c->name .'<br />';
+                        echo '<input name="post_category[]" type="checkbox"'.$checked.' value="'.$c->term_id.'"> '.$c->name .'<br />';
                     }
                 }
             }
+            do_action('in_author_category_metabox',$current_user->ID);
         }
 
         /**

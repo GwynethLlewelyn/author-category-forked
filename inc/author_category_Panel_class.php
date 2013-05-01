@@ -1,18 +1,16 @@
 <?php
 /**
- * SimplePanel is a class to be used in WordPress to create option panels for themes and plugins
- * using the native settings api
- *
- * @version 0.1
  * @author Ohad Raz <admin@bainternet.info>
  * @copyright 2013 Ohad Raz
  * 
  */
+defined('ABSPATH') || die('Sorry, but you cannot access this page directly.');
 if (!class_exists('Author_category_panel')){
 	/**
 	* Author_category_panel
 	*/
 	class Author_category_panel extends SimplePanel{
+		public $txtD = 'author_cat';
 
 		public function admin_menu(){
 			$this->slug = add_users_page(
@@ -29,10 +27,10 @@ if (!class_exists('Author_category_panel')){
 		}
 
 		public function add_meta_boxes(){
-			add_meta_box( 'save_sidebar', __('Save changes'), array($this,'savec'), __FILE__, 'side','low');
-			add_meta_box( 'Credit_sidebar', __('Credits'), array($this,'credits'), __FILE__, 'side','low');
-			add_meta_box( 'News', __('Latest From Bainternet'), array($this,'news'), __FILE__, 'side','low');
-			add_meta_box( 'main_settings', __('Author category settings'), array($this,'main_settings'), __FILE__, 'normal','low');
+			add_meta_box( 'save_sidebar', __('Save changes',$this->txtD), array($this,'savec'), __FILE__, 'side','low');
+			add_meta_box( 'Credit_sidebar', __('Credits',$this->txtD), array($this,'credits'), __FILE__, 'side','low');
+			add_meta_box( 'News', __('Latest From Bainternet',$this->txtD), array($this,'news'), __FILE__, 'side','low');
+			add_meta_box( 'main_settings', __('Author category settings',$this->txtD), array($this,'main_settings'), __FILE__, 'normal','low');
 		}
 
 		public function news(){
@@ -79,12 +77,12 @@ if (!class_exists('Author_category_panel')){
 		function credits(){
 			?>
 			<p><strong>
-				<?php echo __( 'Want to help make this plugin even better? All donations are used to improve and support, so donate $20, $50 or $100 now!' ); ?></strong></p>
+				<?php echo __( 'Want to help make this plugin even better? All donations are used to improve and support, so donate $20, $50 or $100 now!' ,$this->txtD); ?></strong></p>
 			<a class="" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K4MMGF5X3TM5L" target="_blank"><img type="image" src="https://www.paypalobjects.com/<?php echo get_locale(); ?>/i/btn/btn_donate_LG.gif" border="0" alt="PayPal Ñ The safer, easier way to pay online."></a>
-            <p><?php _e( 'Or you could:', 'obenland-wp' ); ?></p>
+            <p><?php _e( 'Or you could:' ,$this->txtD ); ?></p>
             <ul>
-                    <li><a href="http://wordpress.org/extend/plugins/author-category/"><?php _e( 'Rate the plugin 5&#9733; on WordPress.org' ); ?></a></li>
-                    <li><a href="http://wordpress.org/extend/plugins/author-category/"><?php _e( 'Blog about it &amp; link to the plugin page'); ?></a></li>
+                    <li><a href="http://wordpress.org/extend/plugins/author-category/"><?php _e( 'Rate the plugin 5&#9733; on WordPress.org',$this->txtD ); ?></a></li>
+                    <li><a href="http://wordpress.org/extend/plugins/author-category/"><?php _e( 'Blog about it &amp; link to the plugin page',$this->txtD); ?></a></li>
             </ul>
             <?php
 		}
@@ -137,11 +135,11 @@ if (!class_exists('Author_category_panel')){
 			}
 		}
 	}//end class
-
+	$txtD = 'author_cat';
 	$p = new Author_category_panel(
 		array(
-			'title'      => __('Author category settings'),
-			'name'       => __('Author category'),
+			'title'      => __('Author category settings',$txtD),
+			'name'       => __('Author category',$txtD),
 			'capability' => 'manage_options',
 			'option'     => 'author_cat_option'
 		)
@@ -151,27 +149,27 @@ if (!class_exists('Author_category_panel')){
 		'option_group'      =>  'author-cat-group',
 		'sanitize_callback' => null,
 		'id'                => 'author_cat_id', 
-		'title'             => __('Author Category settings')
+		'title'             => __('Author Category settings',$txtD)
 		)
 	);
 	//checkbox field
 	$p->add_field(array(
-		'label'   => __('Check none by default'),
+		'label'   => __('Check none by default',$txtD),
 		'std'     => false,
 		'id'      => 'check_multi',
 		'type'    => 'checkbox',
 		'section' => $setting,
-		'desc'    => __('When using multiple categories they are all checked by default, check this box to disable that.')
+		'desc'    => __('When using multiple categories they are all checked by default, check this box to disable that.',$txtD)
 		)
 	);
 	$p->add_help_tab(array(
 		'id'      => 'author_cat_help_id',
-		'title'   => 'Author Category',
+		'title'   => __('Author Category',$txtD),
 		'content' => '<div style="min-height: 350px">
-                <h2 style="text-align: center;">'.__('Author Category').'</h2>
+                <h2 style="text-align: center;">'.__('Author Category',$txtD).'</h2>
                 <div>
-                		<p>'.__('If you have any questions or problems head over to').' <a href="http://wordpress.org/support/plugin/author-category">' . __('Plugin Support') . '</a></p>
-                        <p>' .__('If you like my wrok then please ') .'<a class="button button-primary" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K4MMGF5X3TM5L" target="_blank">' . __('Donate') . '</a>
+                		<p>'.__('If you have any questions or problems head over to',$txtD).' <a href="http://wordpress.org/support/plugin/author-category">' . __('Plugin Support',$txtD) . '</a></p>
+                        <p>' .__('If you like my wrok then please ',$txtD) .'<a class="button button-primary" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K4MMGF5X3TM5L" target="_blank">' . __('Donate',$txtD) . '</a>
                 </div>
         </div>
         '

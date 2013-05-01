@@ -28,13 +28,17 @@ Author URI: http://en.bainternet.info
 */
 
 /* Disallow direct access to the plugin file */
-if (basename($_SERVER['PHP_SELF']) == basename (__FILE__)) {
-    die('Sorry, but you cannot access this page directly.');
-}
+defined('ABSPATH') || die('Sorry, but you cannot access this page directly.');
 
 if (!class_exists('author_category')){
     class author_category{
-
+        /**
+         * $txtDomain
+         * 
+         * Holds textDomain
+         * @since  0.7
+         * @var string
+         */
         public  $txtDomain = 'author_cat';
 
         /**

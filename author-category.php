@@ -3,12 +3,12 @@
 Plugin Name: Author Category
 Plugin URI: http://en.bainternet.info
 Description: simple plugin limit authors to post just in one category.
-Version: 0.6
+Version: 0.7
 Author: Bainternet
 Author URI: http://en.bainternet.info
 */
 /*
-        *   Copyright (C) 2012  Ohad Raz
+        *   Copyright (C) 2012 - 2013 Ohad Raz
         *   http://en.bainternet.info
         *   admin@bainternet.info
 
@@ -35,6 +35,8 @@ if (basename($_SERVER['PHP_SELF']) == basename (__FILE__)) {
 if (!class_exists('author_category')){
     class author_category{
 
+        public  $txtDomain = 'author_cat';
+
         /**
          * class constractor
          * @author Ohad Raz
@@ -44,6 +46,9 @@ if (!class_exists('author_category')){
             
             $this->hooks();
 
+            if (is_admin()){
+                $this->adminHooks();                
+            }
         }
 
         /**
@@ -66,25 +71,32 @@ if (!class_exists('author_category')){
 
             //post by email cat
             add_filter( 'publish_phone',array($this,'post_by_email_cat'));
+        }
 
+        /**
+         * hooks add all action and filter hooks for admin side
+         * 
+         * @since 0.7
+         * @return void
+         */
+        public function adminHooks(){
+            //translations
+            add_action('plugins_loaded', array($this,'load_translation'));
             //remove quick and bulk edit
             global $pagenow;
-            if (is_admin()){
-                //add metabox 
-                add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
-                //plugin links row
-                add_filter( 'plugin_row_meta', array($this,'_my_plugin_links'), 10, 2 );
+            if ('edit.php' == $pagenow)
+                add_action('admin_print_styles',array(&$this,'remove_quick_edit'));
 
-                //add admin panel
-                if (!class_exists('SimplePanel')){
-                    require_once(plugin_dir_path(__FILE__).'inc/Simple_Panel_class.php');
-                    require_once(plugin_dir_path(__FILE__).'inc/author_category_Panel_class.php');
-                }
+            //add metabox 
+            add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
+            //plugin links row
+            add_filter( 'plugin_row_meta', array($this,'_my_plugin_links'), 10, 2 );
 
-                if ('edit.php' == $pagenow)
-                    add_action('admin_print_styles',array(&$this,'remove_quick_edit'));
+            //add admin panel
+            if (!class_exists('SimplePanel')){
+                require_once(plugin_dir_path(__FILE__).'inc/Simple_Panel_class.php');
+                require_once(plugin_dir_path(__FILE__).'inc/author_category_Panel_class.php');
             }
-            
         }
 
         /**
@@ -179,7 +191,7 @@ if (!class_exists('author_category')){
                 //add user specific categories
                 add_meta_box( 
                      'author_cat'
-                    ,__( 'Author category','author_cat' )
+                    ,__( 'Author category',$this->txtDomain )
                     ,array( &$this, 'render_meta_box_content' )
                     ,'post' 
                     ,'side'
@@ -205,16 +217,16 @@ if (!class_exists('author_category')){
             if (!empty($cats) && count($cats) > 0){
                 if (count($cats) == 1){
                     $c = get_category($cats[0]);
-                    echo __('this will be posted in: <strong>','author_cat') . $c->name .__('</strong> Category');
+                    echo __('this will be posted in: <strong>',$this->txtDomain) . $c->name .__('</strong> Category',$this->txtDomain);
                     echo '<input name="post_category[]" type="hidden" value="'.$c->term_id.'">';
                 }else{
-                    echo '<span style="color: #f00;">'.__('Make Sure you select only the categories you want: <strong>','author_cat').'</span><br />';
+                    echo '<span style="color: #f00;">'.__('Make Sure you select only the categories you want: <strong>',$this->txtDomain).'</span><br />';
                     $options = get_option('author_cat_option');
                     $checked =  (!isset($options['check_multi']))? ' checked="checked"' : '';
 
                     foreach($cats as $cat ){
                         $c = get_category($cat);
-                        echo '<input name="post_category[]" type="checkbox"'.$checked.' value="'.$c->term_id.'"> '.$c->name .'<br />';
+                        echo '<label><input name="post_category[]" type="checkbox"'.$checked.' value="'.$c->term_id.'"> '.$c->name .'</label><br />';
                     }
                 }
             }
@@ -235,11 +247,12 @@ if (!class_exists('author_category')){
             get_currentuserinfo();
             if ($current_user->ID == $user->ID) { return false; }
             $select = wp_dropdown_categories(array(
-                            'show_count' => 0,
+                            'orderby'      => 'name',
+                            'show_count'   => 0,
                             'hierarchical' => 1,
-                            'hide_empty' => 0,
-                            'echo' => 0,
-                            'name' => 'author_cat[]'));
+                            'hide_empty'   => 0,
+                            'echo'         => 0,
+                            'name'         => 'author_cat[]'));
             $saved = get_user_meta($user->ID, '_author_cat', true );
             foreach((array)$saved as $c){
                 $select = str_replace('value="'.$c.'"','value="'.$c.'" selected="selected"',$select);
@@ -248,19 +261,19 @@ if (!class_exists('author_category')){
             echo '<h3>'.__('Author Category', 'author_cat').'</h3>
             <table class="form-table">
                 <tr>
-                    <th><label for="author_cat">'.__('Category').'</label></th>
+                    <th><label for="author_cat">'.__('Category',$this->txtDomain).'</label></th>
                     <td>
                         '.$select.'
                         <br />
-                    <span class="description">'.__('select a category to limit an author to post just in that category (use Crtl to select more then one).','author_cat').'</span>
+                    <span class="description">'.__('select a category to limit an author to post just in that category (use Crtl to select more then one).',$this->txtDomain).'</span>
                     </td>
                 </tr>
                 <tr>
-                    <th><label for="author_cat_clear">'.__('Clear Category').'</label></th>
+                    <th><label for="author_cat_clear">'.__('Clear Category',$this->txtDomain).'</label></th>
                     <td>
                         <input type="checkbox" name="author_cat_clear" value="1" />
                         <br />
-                    <span class="description">'.__('Check if you want to clear the limitation for this user.','author_cat').'</span>
+                    <span class="description">'.__('Check if you want to clear the limitation for this user.',$this->txtDomain).'</span>
                     </td>
                 </tr>
             </table>';
@@ -325,11 +338,25 @@ if (!class_exists('author_category')){
             $plugin = plugin_basename(__FILE__);  
             if ($file == $plugin) // only for this plugin 
                 return array_merge( $links, 
-                    array( '<a href="http://en.bainternet.info/category/plugins">' . __('Other Plugins by this author' ) . '</a>' ), 
-                    array( '<a href="http://wordpress.org/support/plugin/author-category">' . __('Plugin Support') . '</a>' ), 
-                    array( '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K4MMGF5X3TM5L" target="_blank">' . __('Donate') . '</a>' ) 
+                    array( '<a href="http://en.bainternet.info/category/plugins">' . __('Other Plugins by this author',$this->txtDomain ) . '</a>' ), 
+                    array( '<a href="http://wordpress.org/support/plugin/author-category">' . __('Plugin Support',$this->txtDomain) . '</a>' ), 
+                    array( '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K4MMGF5X3TM5L" target="_blank">' . __('Donate',$this->txtDomain) . '</a>' ) 
                 ); 
             return $links;
+        }
+
+        /**
+         * load_translation 
+         * 
+         * Loads translations
+         * 
+         * @author Ohad Raz <admin@bainternet.info>
+         * @since 0.7
+         * 
+         * @return void
+         */
+        public function load_translation(){
+            load_plugin_textdomain( $this->txtDomain, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
         }
     }//end class
 }//end if

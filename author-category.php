@@ -3,7 +3,7 @@
 Plugin Name: Author Category
 Plugin URI: http://en.bainternet.info
 Description: simple plugin limit authors to post just in one category.
-Version: 0.7
+Version: 0.8
 Author: Bainternet
 Author URI: http://en.bainternet.info
 */
@@ -85,7 +85,7 @@ if (!class_exists('author_category')){
          */
         public function adminHooks(){
             //translations
-            add_action('plugins_loaded', array($this,'load_translation'));
+            $this->load_translation();
             //remove quick and bulk edit
             global $pagenow;
             if ('edit.php' == $pagenow)

@@ -3,7 +3,7 @@ Contributors: bainternet
 Donate link:http://en.bainternet.info/donations
 Tags: author category, limit author to category, author posts to category
 Requires at least: 3.0
-Tested up to: 4.7.0
+Tested up to: 4.8.0
 Stable tag: 0.8
 
 simple lightweight plugin limit authors to post just in one category.

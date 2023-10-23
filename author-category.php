@@ -3,18 +3,19 @@
 Plugin Name: Author Category
 Plugin URI: http://en.bainternet.info
 Description: simple plugin limit authors to post just in one category.
-Version: 0.8
-Author: Bainternet
-Author URI: http://en.bainternet.info
+Version: 0.10
+Author: Bainternet,GwynethLlewelyn
+Author URI: https://en.bainternet.info
 */
 /*
-        *   Copyright (C) 2012 - 2013 Ohad Raz
+        *   Copyright (C) 2012 - 2023 Ohad Raz
         *   http://en.bainternet.info
         *   admin@bainternet.info
 
-        This program is free software; you can redistribute it and/or modify
+
+        This program is free software: you can redistribute it and/or modify
         it under the terms of the GNU General Public License as published by
-        the Free Software Foundation; either version 2 of the License, or
+        the Free Software Foundation, either version 3 of the License, or
         (at your option) any later version.
 
         This program is distributed in the hope that it will be useful,
@@ -23,8 +24,7 @@ Author URI: http://en.bainternet.info
         GNU General Public License for more details.
 
         You should have received a copy of the GNU General Public License
-        along with this program; if not, write to the Free Software
-        Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 /* Disallow direct access to the plugin file */

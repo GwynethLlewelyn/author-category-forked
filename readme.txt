@@ -1,16 +1,16 @@
 === Author Category ===
-Contributors: bainternet
-Donate link:http://en.bainternet.info/donations
+Contributors: bainternet, GwynethLlewelyn
+Donate link: https://en.bainternet.info/donations
 Tags: author category, limit author to category, author posts to category
 Requires at least: 3.0
-Tested up to: 4.8.0
-Stable tag: 0.8
+Tested up to: 6.3.2
+Stable tag: 0.10
 
-simple lightweight plugin limit authors to post just in one category.
+A fork of a simple lightweight plugin that limits authors to post just in one category.
 
 == Description ==
 
-This Plugin allows you to select specific category per user and all of that users posts will be posted in that category only.
+This plugin allows you to select a specific category per user and all of that users posts will be posted in that category only.
 
 
 **Main Features:**
@@ -22,7 +22,7 @@ This Plugin allows you to select specific category per user and all of that user
 *   Option to clear selection.(new)
 *   multiple categories per user.(new)
 
-French traslation (since 0.8) thanks to jyd44
+French traslation (since 0.8) thanks to @jyd44
 
 
 
@@ -52,6 +52,9 @@ Simply login as the admin user and under each user >> profile select the categor
 2. Author category metabox.
 
 == Changelog ==
+ = 0.10 =
+* Started fixing everything to become compatible with PHP 8.2 and WP 6.3.2 
+
  = 0.8 = 
 Added POT file for translations.
 Added french translation.

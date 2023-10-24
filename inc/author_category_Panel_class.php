@@ -139,7 +139,7 @@ if ( ! class_exists( 'Author_Category_Panel' ) ) {
 			do_action( __FILE__ . 'add_meta_boxes' );
 			?>
 			<div class="wrap">
-				<?php screen_icon( 'options-general' ); ?>
+				<?php /* Deprecated: screen_icon( 'options-general' ); */ ?>
 				<h2><?php echo esc_html( $this->name ); ?></h2>
 				<form action="options.php" method="POST">
 					<div id="poststuff" class="metabox-holder has-right-sidebar">

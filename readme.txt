@@ -19,10 +19,10 @@ This plugin allows you to select a specific category per user and all of that us
 *   Only users with a specified category will be limited to that category, other will still have full control.
 *   Removes category metabox for selected users.
 *   Removed categories from quick edit for selected users.
-*   Option to clear selection.(new)
-*   multiple categories per user.(new)
+*   Option to clear selection. (new)
+*   Multiple categories per user. (new)
 
-French traslation (since 0.8) thanks to @jyd44
+French translation (since 0.8) thanks to @jyd44
 
 
 
@@ -34,8 +34,8 @@ Also check out my <a href=\"http://en.bainternet.info/category/plugins\">other p
 
 == Installation ==
 
-1.  Extract the zip file and just drop the contents in the wp-content/plugins/ directory of your WordPress installation.
-2.  Then activate the Plugin from Plugins page.
+1.  Extract the zip file and just drop the contents in the `wp-content/plugins/` directory of your WordPress installation.
+2.  Then activate the Plugin from the Plugins page.
 3.  Done!
 == Frequently Asked Questions ==
 
@@ -45,7 +45,7 @@ Simply use the <a href=\"http://wordpress.org/tags/author-category?forum_id=10\"
 
 = How To Use =
 
-Simply login as the admin user and under each user >> profile select the category for that user.
+Just login as the admin user and under each user »» profile select the category for that user.
 
 == Screenshots ==
 1. User category selection under user profile.
@@ -53,39 +53,41 @@ Simply login as the admin user and under each user >> profile select the categor
 
 == Changelog ==
  = 0.10 =
-* Started fixing everything to become compatible with PHP 8.2 and WP 6.3.2
+* Started fixing everything to become compatible with PHP 8.2 and WP 6.3.2.
+* Try to adhere to the WordPress Coding Standards as much as possible, using PHP Code Sniffer and
+PHP Mess Detector to properly clean up code.
 
  = 0.8 =
-Added POT file for translations.
-Added french translation.
-Fixed translation loading to an earlest time to allow panel translation.
+* Added POT file for translations.
+* Added french translation.
+* Fixed translation loading to an earlest time to allow panel translation.
 
  = 0.7 =
-updated simple panel version.
-added textdomain to plugin and to option panel.
-wrapped checkboxes with labels
-categoires are now ordered by name.
+* Updated simple panel version.
+* Added textdomain to plugin and to option panel.
+* Wrapped checkboxes with labels.
+* Categories are now ordered by name.
 
  = 0.6 =
 Fixed xmlrpc posting issue.
-Added an option panel to allow configuration of multiple categories.
-added An action hook `in_author_category_metabox`
+* Added an option panel to allow configuration of multiple categories.
+* Added an action hook `in_author_category_metabox`.
 
  = 0.5 =
-Added post by mail category limitation.
+* Added post by mail category limitation.
 
  = 0.4 =
-Added support for multiple categories per user.
-added option to remove user selected category.
+* Added support for multiple categories per user.
+* Added option to remove user selected category.
 
  = 0.3 =
-added plugin links,
-added XMLRPC and Quickpress support
-changed category save function from save_post to default input_tax field.
-added a function to overwrite default category option per user.
+* Added plugin links,
+* Added XMLRPC and Quickpress support.
+* Changed category save function from `save_post` to default `input_tax` field.
+* Added a function to overwrite default category option per user.
 
  = 0.2 =
-Fixed admin profile update issue.
+* Fixed admin profile update issue.
 
  = 0.1 =
-initial release
+* Initial release.

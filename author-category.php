@@ -392,7 +392,7 @@ if ( ! class_exists( 'Author_Category' ) ) {
 		 * @return void
 		 */
 		public function load_translation() {
-			load_plugin_textdomain( $this->txt_domain, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+			load_plugin_textdomain( AUTHOR_CATEGORY_TEXT_DOMAIN, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 		}
 	} // end class
 } // end if

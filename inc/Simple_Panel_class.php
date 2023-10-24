@@ -287,7 +287,7 @@ if ( ! class_exists( 'SimplePanel' ) ) {
 		public function sanitize_callback( $input ) {
 			// Debug $input (I suspect it's empty — gwyneth 20231024).
 			if ( defined( 'WP_DEBUG' ) ) {
-				error_log( '[DEBUG] SimplePanel::sanitize_callback(): \$input was: ' . print_r( $input, true ) );
+				error_log( '[DEBUG] SimplePanel::sanitize_callback(): $input was: ' . print_r( $input, true ) );
 			}
 			// sanitize!
 			$input = apply_filters( 'simple_panel_sanitize', $input, $this->option, $this );
@@ -302,7 +302,7 @@ if ( ! class_exists( 'SimplePanel' ) ) {
 					$options[ $key ] = $value;
 				}
 			} elseif ( defined( 'WP_DEBUG' ) ) {
-				error_log( '[WARN] SimplePanel::sanitize_callback(): No options found, \$options was: ' . print_r( $options, true ) );
+				error_log( '[WARN] SimplePanel::sanitize_callback(): No options found, $options was: ' . print_r( $options, true ) );
 			}
 			// Return all options, or possibly false.
 			return $options;

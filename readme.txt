@@ -4,7 +4,7 @@ Donate link: https://en.bainternet.info/donations
 Tags: author category, limit author to category, author posts to category
 Requires at least: 3.0
 Tested up to: 6.3.2
-Stable tag: 0.10
+Stable tag: 0.10.0
 
 A fork of a simple lightweight plugin that limits authors to post just in one category.
 
@@ -30,7 +30,7 @@ Any feedback or suggestions are welcome.
 
 Also check out my <a href=\"http://en.bainternet.info/category/plugins\">other plugins</a>
 
- 
+
 
 == Installation ==
 
@@ -53,9 +53,9 @@ Simply login as the admin user and under each user >> profile select the categor
 
 == Changelog ==
  = 0.10 =
-* Started fixing everything to become compatible with PHP 8.2 and WP 6.3.2 
+* Started fixing everything to become compatible with PHP 8.2 and WP 6.3.2
 
- = 0.8 = 
+ = 0.8 =
 Added POT file for translations.
 Added french translation.
 Fixed translation loading to an earlest time to allow panel translation.
@@ -71,21 +71,21 @@ Fixed xmlrpc posting issue.
 Added an option panel to allow configuration of multiple categories.
 added An action hook `in_author_category_metabox`
 
- = 0.5 = 
+ = 0.5 =
 Added post by mail category limitation.
 
- = 0.4 = 
+ = 0.4 =
 Added support for multiple categories per user.
 added option to remove user selected category.
 
- = 0.3 =  
+ = 0.3 =
 added plugin links,
 added XMLRPC and Quickpress support
 changed category save function from save_post to default input_tax field.
 added a function to overwrite default category option per user.
 
- = 0.2 = 
+ = 0.2 =
 Fixed admin profile update issue.
 
- = 0.1 = 
+ = 0.1 =
 initial release

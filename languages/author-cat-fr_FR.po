@@ -18,7 +18,7 @@ msgstr ""
 "\\plugins\\author-category\n"
 
 #: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/author-category.php:198
-#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/author_category_Panel_class.php:142
+#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/Author_Category_Panel_class.php:142
 msgid "Author category"
 msgstr "Author category"
 
@@ -37,8 +37,8 @@ msgstr ""
 "lesquelles cet article sera publié"
 
 #: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/author-category.php:265
-#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/author_category_Panel_class.php:167
-#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/author_category_Panel_class.php:169
+#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/Author_Category_Panel_class.php:167
+#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/Author_Category_Panel_class.php:169
 msgid "Author Category"
 msgstr "Catégories Autorisées"
 
@@ -67,33 +67,33 @@ msgid "Other Plugins by this author"
 msgstr "Autres Plugins du même auteur"
 
 #: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/author-category.php:346
-#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/author_category_Panel_class.php:171
+#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/Author_Category_Panel_class.php:171
 msgid "Plugin Support"
 msgstr "la page de Support"
 
 #: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/author-category.php:347
-#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/author_category_Panel_class.php:172
+#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/Author_Category_Panel_class.php:172
 msgid "Donate"
 msgstr "Faire une donation"
 
-#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/author_category_Panel_class.php:30
+#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/Author_Category_Panel_class.php:30
 msgid "Save changes"
 msgstr "Sauvegarder les modifications"
 
-#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/author_category_Panel_class.php:31
+#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/Author_Category_Panel_class.php:31
 msgid "Credits"
 msgstr "Credits"
 
-#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/author_category_Panel_class.php:32
+#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/Author_Category_Panel_class.php:32
 msgid "Latest From Bainternet"
 msgstr "Dernières infos sur Bainternet"
 
-#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/author_category_Panel_class.php:33
-#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/author_category_Panel_class.php:141
+#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/Author_Category_Panel_class.php:33
+#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/Author_Category_Panel_class.php:141
 msgid "Author category settings"
 msgstr "Paramétrage du Plugin Author Category"
 
-#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/author_category_Panel_class.php:80
+#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/Author_Category_Panel_class.php:80
 msgid ""
 "Want to help make this plugin even better? All donations are used to improve "
 "and support, so donate $20, $50 or $100 now!"
@@ -102,27 +102,27 @@ msgstr ""
 "sseront dévolues à l'amélioration et au support. Vous pouvez d'ores et déjà "
 "donner $20, $50 or $100 "
 
-#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/author_category_Panel_class.php:82
+#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/Author_Category_Panel_class.php:82
 msgid "Or you could:"
 msgstr "Ou vous pourriez:"
 
-#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/author_category_Panel_class.php:84
+#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/Author_Category_Panel_class.php:84
 msgid "Rate the plugin 5&#9733; on WordPress.org"
 msgstr "Classer ce plugin 5&#9733; sur WordPress.org"
 
-#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/author_category_Panel_class.php:85
+#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/Author_Category_Panel_class.php:85
 msgid "Blog about it &amp; link to the plugin page"
 msgstr "Parler de ce plugin et publier un lien vers sa page"
 
-#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/author_category_Panel_class.php:152
+#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/Author_Category_Panel_class.php:152
 msgid "Author Category settings"
 msgstr "Paramètres du Plugin Author Category"
 
-#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/author_category_Panel_class.php:157
+#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/Author_Category_Panel_class.php:157
 msgid "Check none by default"
 msgstr "Ne selectionner aucune par défaut"
 
-#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/author_category_Panel_class.php:162
+#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/Author_Category_Panel_class.php:162
 msgid ""
 "When using multiple categories they are all checked by default, check this "
 "box to disable that."
@@ -130,12 +130,12 @@ msgstr ""
 "Lorsque plusieurs catégories sont possibles, par défaut elles sont toutes "
 "sélectionnées. Pour l'éviter, sélectionnez cette marque"
 
-#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/author_category_Panel_class.php:171
+#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/Author_Category_Panel_class.php:171
 msgid "If you have any questions or problems head over to"
 msgstr ""
 "Si vous avez des questions ou des difficultés, n'hésitez pas à consulter la "
 
-#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/author_category_Panel_class.php:172
+#: C:\xampp-1-7-7\htdocs\wordpress\wp-content\plugins\author-category/inc/Author_Category_Panel_class.php:172
 msgid "If you like my wrok then please "
 msgstr "Si vous aimez ce plugin, n'hésitez pas à"
 

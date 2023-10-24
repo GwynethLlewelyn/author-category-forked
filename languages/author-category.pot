@@ -12,7 +12,7 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: author-category.php:198 inc/author_category_Panel_class.php:142
+#: author-category.php:198 inc/Author_Category_Panel_class.php:142
 msgid "Author category"
 msgstr ""
 
@@ -30,8 +30,8 @@ msgstr ""
 
 #. #-#-#-#-#  plugin.pot (Author Category 0.7)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
-#: author-category.php:265 inc/author_category_Panel_class.php:167
-#: inc/author_category_Panel_class.php:169
+#: author-category.php:265 inc/Author_Category_Panel_class.php:167
+#: inc/Author_Category_Panel_class.php:169
 msgid "Author Category"
 msgstr ""
 
@@ -57,11 +57,11 @@ msgstr ""
 msgid "Other Plugins by this author"
 msgstr ""
 
-#: author-category.php:346 inc/author_category_Panel_class.php:171
+#: author-category.php:346 inc/Author_Category_Panel_class.php:171
 msgid "Plugin Support"
 msgstr ""
 
-#: author-category.php:347 inc/author_category_Panel_class.php:172
+#: author-category.php:347 inc/Author_Category_Panel_class.php:172
 msgid "Donate"
 msgstr ""
 
@@ -69,60 +69,60 @@ msgstr ""
 msgid "Sorry, you cannot upload this file type for this field."
 msgstr ""
 
-#: inc/author_category_Panel_class.php:30
+#: inc/Author_Category_Panel_class.php:30
 msgid "Save changes"
 msgstr ""
 
-#: inc/author_category_Panel_class.php:31
+#: inc/Author_Category_Panel_class.php:31
 msgid "Credits"
 msgstr ""
 
-#: inc/author_category_Panel_class.php:32
+#: inc/Author_Category_Panel_class.php:32
 msgid "Latest From Bainternet"
 msgstr ""
 
-#: inc/author_category_Panel_class.php:33
-#: inc/author_category_Panel_class.php:141
+#: inc/Author_Category_Panel_class.php:33
+#: inc/Author_Category_Panel_class.php:141
 msgid "Author category settings"
 msgstr ""
 
-#: inc/author_category_Panel_class.php:80
+#: inc/Author_Category_Panel_class.php:80
 msgid ""
 "Want to help make this plugin even better? All donations are used to improve "
 "and support, so donate $20, $50 or $100 now!"
 msgstr ""
 
-#: inc/author_category_Panel_class.php:82
+#: inc/Author_Category_Panel_class.php:82
 msgid "Or you could:"
 msgstr ""
 
-#: inc/author_category_Panel_class.php:84
+#: inc/Author_Category_Panel_class.php:84
 msgid "Rate the plugin 5&#9733; on WordPress.org"
 msgstr ""
 
-#: inc/author_category_Panel_class.php:85
+#: inc/Author_Category_Panel_class.php:85
 msgid "Blog about it &amp; link to the plugin page"
 msgstr ""
 
-#: inc/author_category_Panel_class.php:152
+#: inc/Author_Category_Panel_class.php:152
 msgid "Author Category settings"
 msgstr ""
 
-#: inc/author_category_Panel_class.php:157
+#: inc/Author_Category_Panel_class.php:157
 msgid "Check none by default"
 msgstr ""
 
-#: inc/author_category_Panel_class.php:162
+#: inc/Author_Category_Panel_class.php:162
 msgid ""
 "When using multiple categories they are all checked by default, check this "
 "box to disable that."
 msgstr ""
 
-#: inc/author_category_Panel_class.php:171
+#: inc/Author_Category_Panel_class.php:171
 msgid "If you have any questions or problems head over to"
 msgstr ""
 
-#: inc/author_category_Panel_class.php:172
+#: inc/Author_Category_Panel_class.php:172
 msgid "If you like my wrok then please "
 msgstr ""
 

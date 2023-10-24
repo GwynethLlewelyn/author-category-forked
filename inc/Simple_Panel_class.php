@@ -159,7 +159,7 @@ if ( ! class_exists( 'SimplePanel' ) ) {
 		}
 
 		/**
-		 * Allows Extending classes to add action and filter hook
+		 * Allows Extending classes to add action and filter hook.
 		 *
 		 * @author Ohad Raz <admin@bainternet.info>
 		 * @since 0.2
@@ -168,6 +168,9 @@ if ( ! class_exists( 'SimplePanel' ) ) {
 		 */
 		public function extra_hooks() {
 			/* Does nothing. */
+			if ( defined( 'WP_DEBUG' ) ) {
+				error_log( '[INFO] SimplePanel::extra_hooks() called, but we have nothing to do here' );
+			}
 		}
 
 		/**
@@ -274,14 +277,18 @@ if ( ! class_exists( 'SimplePanel' ) ) {
 		/**
 		 * This function lets you sanitize the data before saving.
 		 *
-		 * @uses apply_filters('simple_panel_sanitize'
+		 * @uses apply_filters( 'simple_panel_sanitize' )
 		 * @author Ohad Raz <admin@bainternet.info>
 		 * @since 0.1
 		 * @access public
-		 * @param  mixed $input form data.
-		 * @return mixed sanitized data
+		 * @param  mixed $input Form data.
+		 * @return mixed Sanitized data
 		 */
 		public function sanitize_callback( $input ) {
+			// Debug $input (I suspect it's empty — gwyneth 20231024).
+			if ( defined( 'WP_DEBUG' ) ) {
+				error_log( '[DEBUG] SimplePanel::sanitize_callback(): \$input was: ' . print_r( $input, true ) );
+			}
 			// sanitize!
 			$input = apply_filters( 'simple_panel_sanitize', $input, $this->option, $this );
 
@@ -289,11 +296,16 @@ if ( ! class_exists( 'SimplePanel' ) ) {
 			// Note: This was commented out, why (gwyneth 20231023)?
 			$options = get_option( $this->option );
 
-			// Update only the needed options.
-			foreach ( $input as $key => $value ) {
-				$options[ $key ] = $value;
+			if ( ! empty( $input ) && ! empty( $options ) && false !== $options ) {
+				// Update only the needed options.
+				foreach ( $input as $key => $value ) {
+					$options[ $key ] = $value;
+				}
+			} elseif ( defined( 'WP_DEBUG' ) ) {
+				error_log( '[WARN] SimplePanel::sanitize_callback(): No options found, \$options was: ' . print_r( $options, true ) );
 			}
-			// return all options.
+
+			// Return all options, or possibly false.
 			return $options;
 		}
 
@@ -326,7 +338,7 @@ if ( ! class_exists( 'SimplePanel' ) ) {
 		 */
 		public function get_value( $key = '', $def = '' ) {
 			$options = get_option( $this->option );
-			if ( isset( $options[ $key ] ) ) {
+			if ( ! empty( $options ) && false !== $options && isset( $options[ $key ] ) ) {
 				return $options[ $key ];
 			}
 			return $def;
@@ -532,14 +544,17 @@ if ( ! class_exists( 'SimplePanel' ) ) {
 
 
 		/**
-		 * A callback for future usage.
+		 * A callback for future hook usage.
 		 *
-		 * @todo do something with this function, maybe a hook?
+		 * @see SimplePanel::extra_hooks()
 		 * @access public
 		 * @return void
 		 */
 		public function section_callback() {
-			// todo...
+			/* Does nothing. */
+			if ( defined( 'WP_DEBUG' ) ) {
+				error_log( '[INFO] SimplePanel::section_callback() called, but we have nothing to do here' );
+			}
 		}
 
 		/**

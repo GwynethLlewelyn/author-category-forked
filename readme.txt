@@ -52,7 +52,7 @@ Just login as the admin user and under each user »» profile select the categor
 2. Author category metabox.
 
 == Changelog ==
- = 0.10 =
+ = 0.10.0 =
 * Started fixing everything to become compatible with PHP 8.2 and WP 6.3.2.
 * Try to adhere to the WordPress Coding Standards as much as possible, using PHP Code Sniffer and
 PHP Mess Detector to properly clean up code.

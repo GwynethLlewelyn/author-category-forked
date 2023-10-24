@@ -172,16 +172,16 @@ if ( ! class_exists( 'SimplePanel' ) ) {
 
 		/**
 		 * This function adds the help tabs to the page screen and
-		 * should not be called directly.
+		 * should not be called directly, only by the WP callback system.
 		 *
 		 * @author Ohad Raz <admin@bainternet.info>
 		 * @since 0.1
-		 * @access private
+		 * @access public
 		 * @uses get_current_screen()
 		 * @uses add_help_tab()
 		 * @return void
 		 */
-		private function my_help_tab() {
+		public function my_help_tab() {
 			$screen = get_current_screen();
 
 			/*
@@ -535,10 +535,10 @@ if ( ! class_exists( 'SimplePanel' ) ) {
 		 * A callback for future usage.
 		 *
 		 * @todo do something with this function, maybe a hook?
-		 * @access private
+		 * @access public
 		 * @return void
 		 */
-		private function section_callback() {
+		public function section_callback() {
 			// todo...
 		}
 

@@ -282,12 +282,13 @@ if ( ! class_exists( 'Author_Category' ) ) {
 				);
 			}
 			$select = str_replace( '<select', '<select multiple="multiple"', $select );
+			// Note that the $select below cannot be escaped!
 			echo '<h3>' . esc_html__( 'Author Category', AUTHOR_CATEGORY_TEXT_DOMAIN ) . '</h3>
 			<table class="form-table">
 				<tr>
 					<th><label for="author_cat">' . esc_html__( 'Category', AUTHOR_CATEGORY_TEXT_DOMAIN ) . '</label></th>
 					<td>
-						' . esc_html( $select ) . '
+						' . $select . '
 						<br />
 					<span class="description">' . esc_html__( 'select a category to limit an author to post just in that category (use Crtl to select more then one).',  AUTHOR_CATEGORY_TEXT_DOMAIN ) . '</span>
 					</td>

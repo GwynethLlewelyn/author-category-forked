@@ -12,7 +12,6 @@ A fork of a simple lightweight plugin that limits authors to post just in one ca
 
 This plugin allows you to select a specific category per user and all of that users posts will be posted in that category only.
 
-
 **Main Features:**
 
 *   Only admin can set categories for users.
@@ -24,13 +23,9 @@ This plugin allows you to select a specific category per user and all of that us
 
 French translation (since 0.8) thanks to @jyd44
 
-
-
 Any feedback or suggestions are welcome.
 
 Also check out my <a href=\"http://en.bainternet.info/category/plugins\">other plugins</a>
-
-
 
 == Installation ==
 

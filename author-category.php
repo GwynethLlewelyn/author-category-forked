@@ -131,7 +131,7 @@ if ( ! class_exists( 'Author_Category' ) ) {
 		 */
 		public function user_default_category_option( $myfalse ) {
 			$cat = $this->get_user_cat();
-			if ( ! empty( $cat ) && count( $cat ) > 0 ) {
+			if ( ! empty( $cat ) && is_countable( $cat ) && count( $cat ) > 0 ) {
 				return $cat;
 			}
 			return false;
@@ -149,7 +149,7 @@ if ( ! class_exists( 'Author_Category' ) ) {
 		 */
 		public function user_default_category( $post_data, $con_stactu ) {
 			$cat = $this->get_user_cat( $post_data['post_author'] );
-			if ( ! empty( $cat ) && $cat > 0 ) {
+			if ( ! empty( $cat ) && is_countable( $cat ) && count( $cat ) > 0 ) {
 				$post_data['tax_input']['category'] = array( $cat );
 			}
 			return $post_data;
@@ -167,7 +167,7 @@ if ( ! class_exists( 'Author_Category' ) ) {
 		public function post_by_email_cat( $post_id ) {
 			$p_id = get_post( $post_id );
 			$cat  = $this->get_user_cat( $p_id['post_author'] );
-			if ( $cat ) {
+			if ( ! empty( $cat ) ) {
 				$email_post                  = array();
 				$email_post['ID']            = $post_id;
 				$email_post['post_category'] = array( $cat );
@@ -183,8 +183,9 @@ if ( ! class_exists( 'Author_Category' ) ) {
 		 * @return void
 		 */
 		public function remove_quick_edit() {
+			// May return just an integer, so we check if it's countable or not.
 			$cat = $this->get_user_cat( get_current_user_id() );
-			if ( ! empty( $cat ) && count( $cat ) > 0 ) {
+			if ( ! empty( $cat ) && is_countable( $cat ) && count( $cat ) > 0 ) {
 				echo '<style>.inline-edit-categories{display: none !important;}</style>';
 			}
 		}
@@ -198,7 +199,7 @@ if ( ! class_exists( 'Author_Category' ) ) {
 		public function add_meta_box() {
 			// get author categories.
 			$cat = $this->get_user_cat( get_current_user_id() );
-			if ( ! empty( $cat ) && count( $cat ) > 0 ) {
+			if ( ! empty( $cat ) && is_countable( $cat ) && count( $cat ) > 0 ) {
 				// remove default metabox.
 				remove_meta_box( 'categorydiv', 'post', 'side' );
 				// add user specific categories.
@@ -290,7 +291,7 @@ if ( ! class_exists( 'Author_Category' ) ) {
 					<td>
 						' . $select . '
 						<br />
-					<span class="description">' . esc_html__( 'select a category to limit an author to post just in that category (use Crtl to select more then one).',  AUTHOR_CATEGORY_TEXT_DOMAIN ) . '</span>
+					<span class="description">' . esc_html__( 'Select a category to limit an author to post just in that category (use Crtl/Shift to select more than one).',  AUTHOR_CATEGORY_TEXT_DOMAIN ) . '</span>
 					</td>
 				</tr>
 				<tr>
@@ -298,7 +299,7 @@ if ( ! class_exists( 'Author_Category' ) ) {
 					<td>
 						<input type="checkbox" name="author_cat_clear" value="1" />
 						<br />
-					<span class="description">' . esc_html__( 'Check if you want to clear the limitation for this user.', AUTHOR_CATEGORY_TEXT_DOMAIN ) . '</span>
+					<span class="description">' . esc_html__( 'Check if you want to clear the posting restrictions for this user.', AUTHOR_CATEGORY_TEXT_DOMAIN ) . '</span>
 					</td>
 				</tr>
 			</table>';
@@ -350,12 +351,10 @@ if ( ! class_exists( 'Author_Category' ) ) {
 		 */
 		public function get_user_cat( $user_id = null ) {
 			if ( null === $user_id ) {
-				global $current_user;
-				wp_get_current_user();
-				$user_id = $current_user->ID;
+				$user_id = get_current_user_id();
 			}
 			$cat = get_user_meta( $user_id, '_author_cat', true );
-			if ( empty( $cat ) || count( $cat ) <= 0 || ! is_array( $cat ) ) {
+			if ( empty( $cat ) || ! is_array( $cat ) || count( $cat ) <= 0 ) {
 				return 0;
 			}
 			return $cat[0];

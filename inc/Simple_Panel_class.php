@@ -123,8 +123,8 @@ if ( ! class_exists( 'SimplePanel' ) ) {
 		 * @author Ohad Raz <admin@bainternet.info>
 		 * @since 0.1
 		 * @access public
-		 * @param array   $args		args to set.
-		 * @param boolean $properties  properties to set.
+		 * @param array   $args        Arguments to set.
+		 * @param boolean $properties  Properties to set.
 		 * @return void
 		 */
 		public function set_properties( $args = array(), $properties = false ) {
@@ -304,7 +304,6 @@ if ( ! class_exists( 'SimplePanel' ) ) {
 			} elseif ( defined( 'WP_DEBUG' ) ) {
 				error_log( '[WARN] SimplePanel::sanitize_callback(): No options found, \$options was: ' . print_r( $options, true ) );
 			}
-
 			// Return all options, or possibly false.
 			return $options;
 		}
